@@ -10,8 +10,8 @@ namespace Leons.Data
         }
         DbSet<Rol> Roles { get; set; }
         DbSet<Usuario> Usuarios { get; set; }
-        DbSet<Cliente> Clientes { get; set; }
-        DbSet<Administrador> Administradores { get; set; }
+        //DbSet<Cliente> Clientes { get; set; }
+        //DbSet<Administrador> Administradores { get; set; }
         DbSet<Pedido> Pedidos { get; set; }
         DbSet<Producto> Productos { get; set; }
         DbSet<Carrito> Carritos { get; set; }
@@ -27,24 +27,27 @@ namespace Leons.Data
                 .WithMany(r => r.usuarios)
                 .HasForeignKey(u => u.idRol)
                 .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Cliente>().HasOne(c => c.usuario)
-                .WithMany(u => u.Clientes)
-                .HasForeignKey(c => c.idUsuario)
+           // modelBuilder.Entity<Cliente>().HasOne(c => c.usuario)
+           //     .WithMany(u => u.Clientes)
+           //     .HasForeignKey(c => c.idUsuario)
+           //     .OnDelete(DeleteBehavior.Restrict);
+           //modelBuilder.Entity<Administrador>().HasOne(a => a.usuario)
+           //     .WithMany(u => u.Administradores)
+           //     .HasForeignKey(a => a.idUsuario)
+           //     .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Pedido>().HasOne(p => p.usuario)
+                .WithMany(u => u.Pedidos)
+                .HasForeignKey(p => p.idUsuario)
                 .OnDelete(DeleteBehavior.Restrict);
-           modelBuilder.Entity<Administrador>().HasOne(a => a.usuario)
-                .WithMany(u => u.Administradores)
-                .HasForeignKey(a => a.idUsuario)
+            modelBuilder.Entity<Producto>()
+                .HasOne(p => p.categoria)
+                .WithMany(c => c.productos)
+                .HasForeignKey(p => p.idCategoria)
                 .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Pedido>().HasOne(p => p.cliente)
-                .WithMany(c => c.pedidos)
-                .HasForeignKey(p => p.idCliente)
-                .OnDelete(DeleteBehavior.Restrict);
-            
-
             modelBuilder.Entity<Carrito>()
-                .HasOne(c => c.cliente)
-                .WithMany(cl => cl.carritos)
-                .HasForeignKey(c => c.idCliente)
+                .HasOne(c => c.usuario)
+                .WithMany(u => u.Carritos)
+                .HasForeignKey(c => c.idUsuario)
                 .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<DetalleCarrito>()
                 .HasOne(dc => dc.carrito)

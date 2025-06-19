@@ -11,8 +11,8 @@ namespace Leons.Models
         public DateOnly fechaPedido { get; set; }
         public string estado { get; set; } // Ejemplo: "Pendiente", "Enviado", "Entregado", etc.
         
-        public int idCliente { get; set; }
-        public Cliente cliente { get; set; }
+        public int idUsuario { get; set; }
+        public Usuario usuario { get; set; }
 
         public ICollection<DetallePedido> detallePedidos { get; set; }
     }

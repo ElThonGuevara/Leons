@@ -12,20 +12,17 @@ namespace Leons.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Productos",
+                name: "Categoria",
                 columns: table => new
                 {
-                    idProducto = table.Column<int>(type: "int", nullable: false)
+                    idCategoria = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    precio = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
-                    stock = table.Column<int>(type: "int", nullable: false),
-                    talla = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Productos", x => x.idProducto);
+                    table.PrimaryKey("PK_Categoria", x => x.idCategoria);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,13 +40,42 @@ namespace Leons.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Productos",
+                columns: table => new
+                {
+                    idProducto = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    precio = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
+                    stock = table.Column<int>(type: "int", nullable: false),
+                    talla = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    idCategoria = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Productos", x => x.idProducto);
+                    table.ForeignKey(
+                        name: "FK_Productos_Categoria_idCategoria",
+                        column: x => x.idCategoria,
+                        principalTable: "Categoria",
+                        principalColumn: "idCategoria",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Usuarios",
                 columns: table => new
                 {
                     idUsuario = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    nombreUsuario = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     idRol = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -64,68 +90,21 @@ namespace Leons.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Administradores",
-                columns: table => new
-                {
-                    idAdministrador = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    idUsuario = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Administradores", x => x.idAdministrador);
-                    table.ForeignKey(
-                        name: "FK_Administradores_Usuarios_idUsuario",
-                        column: x => x.idUsuario,
-                        principalTable: "Usuarios",
-                        principalColumn: "idUsuario",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Clientes",
-                columns: table => new
-                {
-                    idCliente = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    idUsuario = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clientes", x => x.idCliente);
-                    table.ForeignKey(
-                        name: "FK_Clientes_Usuarios_idUsuario",
-                        column: x => x.idUsuario,
-                        principalTable: "Usuarios",
-                        principalColumn: "idUsuario",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Carritos",
                 columns: table => new
                 {
                     idCarrito = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    idCliente = table.Column<int>(type: "int", nullable: false)
+                    idUsuario = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Carritos", x => x.idCarrito);
                     table.ForeignKey(
-                        name: "FK_Carritos_Clientes_idCliente",
-                        column: x => x.idCliente,
-                        principalTable: "Clientes",
-                        principalColumn: "idCliente",
+                        name: "FK_Carritos_Usuarios_idUsuario",
+                        column: x => x.idUsuario,
+                        principalTable: "Usuarios",
+                        principalColumn: "idUsuario",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -137,16 +116,16 @@ namespace Leons.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     fechaPedido = table.Column<DateOnly>(type: "date", nullable: false),
                     estado = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    idCliente = table.Column<int>(type: "int", nullable: false)
+                    idUsuario = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pedidos", x => x.idPedido);
                     table.ForeignKey(
-                        name: "FK_Pedidos_Clientes_idCliente",
-                        column: x => x.idCliente,
-                        principalTable: "Clientes",
-                        principalColumn: "idCliente",
+                        name: "FK_Pedidos_Usuarios_idUsuario",
+                        column: x => x.idUsuario,
+                        principalTable: "Usuarios",
+                        principalColumn: "idUsuario",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -206,18 +185,8 @@ namespace Leons.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Administradores_idUsuario",
-                table: "Administradores",
-                column: "idUsuario");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Carritos_idCliente",
+                name: "IX_Carritos_idUsuario",
                 table: "Carritos",
-                column: "idCliente");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Clientes_idUsuario",
-                table: "Clientes",
                 column: "idUsuario");
 
             migrationBuilder.CreateIndex(
@@ -241,9 +210,14 @@ namespace Leons.Migrations
                 column: "idProducto");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pedidos_idCliente",
+                name: "IX_Pedidos_idUsuario",
                 table: "Pedidos",
-                column: "idCliente");
+                column: "idUsuario");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Productos_idCategoria",
+                table: "Productos",
+                column: "idCategoria");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Usuarios_idRol",
@@ -254,9 +228,6 @@ namespace Leons.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Administradores");
-
             migrationBuilder.DropTable(
                 name: "DetalleCarritos");
 
@@ -273,10 +244,10 @@ namespace Leons.Migrations
                 name: "Productos");
 
             migrationBuilder.DropTable(
-                name: "Clientes");
+                name: "Usuarios");
 
             migrationBuilder.DropTable(
-                name: "Usuarios");
+                name: "Categoria");
 
             migrationBuilder.DropTable(
                 name: "Roles");

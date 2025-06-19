@@ -22,40 +22,6 @@ namespace Leons.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Leons.Models.Administrador", b =>
-                {
-                    b.Property<int>("idAdministrador")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idAdministrador"));
-
-                    b.Property<string>("apellido")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("idUsuario")
-                        .HasColumnType("int");
-
-                    b.Property<string>("nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("telefono")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("idAdministrador");
-
-                    b.HasIndex("idUsuario");
-
-                    b.ToTable("Administradores");
-                });
-
             modelBuilder.Entity("Leons.Models.Carrito", b =>
                 {
                     b.Property<int>("idCarrito")
@@ -64,52 +30,35 @@ namespace Leons.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idCarrito"));
 
-                    b.Property<int>("idCliente")
+                    b.Property<int>("idUsuario")
                         .HasColumnType("int");
 
                     b.HasKey("idCarrito");
 
-                    b.HasIndex("idCliente");
+                    b.HasIndex("idUsuario");
 
                     b.ToTable("Carritos");
                 });
 
-            modelBuilder.Entity("Leons.Models.Cliente", b =>
+            modelBuilder.Entity("Leons.Models.Categoria", b =>
                 {
-                    b.Property<int>("idCliente")
+                    b.Property<int>("idCategoria")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idCliente"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idCategoria"));
 
-                    b.Property<string>("apellido")
+                    b.Property<string>("descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("direccion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("idUsuario")
-                        .HasColumnType("int");
 
                     b.Property<string>("nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("telefono")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("idCategoria");
 
-                    b.HasKey("idCliente");
-
-                    b.HasIndex("idUsuario");
-
-                    b.ToTable("Clientes");
+                    b.ToTable("Categoria");
                 });
 
             modelBuilder.Entity("Leons.Models.DetalleCarrito", b =>
@@ -183,12 +132,12 @@ namespace Leons.Migrations
                     b.Property<DateOnly>("fechaPedido")
                         .HasColumnType("date");
 
-                    b.Property<int>("idCliente")
+                    b.Property<int>("idUsuario")
                         .HasColumnType("int");
 
                     b.HasKey("idPedido");
 
-                    b.HasIndex("idCliente");
+                    b.HasIndex("idUsuario");
 
                     b.ToTable("Pedidos");
                 });
@@ -203,6 +152,9 @@ namespace Leons.Migrations
 
                     b.Property<string>("descripcion")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("idCategoria")
+                        .HasColumnType("int");
 
                     b.Property<string>("nombre")
                         .HasColumnType("nvarchar(max)");
@@ -219,6 +171,8 @@ namespace Leons.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("idProducto");
+
+                    b.HasIndex("idCategoria");
 
                     b.ToTable("Productos");
                 });
@@ -250,13 +204,33 @@ namespace Leons.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idUsuario"));
 
+                    b.Property<string>("apellido")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("direccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("idRol")
                         .HasColumnType("int");
 
+                    b.Property<string>("nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("nombreUsuario")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("telefono")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("idUsuario");
@@ -266,32 +240,10 @@ namespace Leons.Migrations
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("Leons.Models.Administrador", b =>
-                {
-                    b.HasOne("Leons.Models.Usuario", "usuario")
-                        .WithMany("Administradores")
-                        .HasForeignKey("idUsuario")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("usuario");
-                });
-
             modelBuilder.Entity("Leons.Models.Carrito", b =>
                 {
-                    b.HasOne("Leons.Models.Cliente", "cliente")
-                        .WithMany("carritos")
-                        .HasForeignKey("idCliente")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("cliente");
-                });
-
-            modelBuilder.Entity("Leons.Models.Cliente", b =>
-                {
                     b.HasOne("Leons.Models.Usuario", "usuario")
-                        .WithMany("Clientes")
+                        .WithMany("Carritos")
                         .HasForeignKey("idUsuario")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -339,13 +291,24 @@ namespace Leons.Migrations
 
             modelBuilder.Entity("Leons.Models.Pedido", b =>
                 {
-                    b.HasOne("Leons.Models.Cliente", "cliente")
-                        .WithMany("pedidos")
-                        .HasForeignKey("idCliente")
+                    b.HasOne("Leons.Models.Usuario", "usuario")
+                        .WithMany("Pedidos")
+                        .HasForeignKey("idUsuario")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("cliente");
+                    b.Navigation("usuario");
+                });
+
+            modelBuilder.Entity("Leons.Models.Producto", b =>
+                {
+                    b.HasOne("Leons.Models.Categoria", "categoria")
+                        .WithMany("productos")
+                        .HasForeignKey("idCategoria")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("categoria");
                 });
 
             modelBuilder.Entity("Leons.Models.Usuario", b =>
@@ -364,11 +327,9 @@ namespace Leons.Migrations
                     b.Navigation("detalleCarrito");
                 });
 
-            modelBuilder.Entity("Leons.Models.Cliente", b =>
+            modelBuilder.Entity("Leons.Models.Categoria", b =>
                 {
-                    b.Navigation("carritos");
-
-                    b.Navigation("pedidos");
+                    b.Navigation("productos");
                 });
 
             modelBuilder.Entity("Leons.Models.Pedido", b =>
@@ -390,9 +351,9 @@ namespace Leons.Migrations
 
             modelBuilder.Entity("Leons.Models.Usuario", b =>
                 {
-                    b.Navigation("Administradores");
+                    b.Navigation("Carritos");
 
-                    b.Navigation("Clientes");
+                    b.Navigation("Pedidos");
                 });
 #pragma warning restore 612, 618
         }

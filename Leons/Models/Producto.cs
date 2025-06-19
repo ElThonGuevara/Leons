@@ -14,6 +14,9 @@ namespace Leons.Models
         public int stock { get; set; }
         public string talla { get; set; }
 
+
+        public int idCategoria { get; set; }
+        public Categoria categoria { get; set; }
         public ICollection<DetallePedido> detallePedidos { get; set; } 
         public ICollection<DetalleCarrito> detalleCarrito { get; set; }
         
