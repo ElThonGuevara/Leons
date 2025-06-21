@@ -1,0 +1,34 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Leons.Models.Rol;
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Rol</title>
+</head>
+<body class="container">
+    <div class="card">
+        <div class=" card-header">Editar Rol</div>
+        <div>
+            <form asp-controller="Roles" asp-action="Editar" method="post">
+                <input asp-for="idRol" type="hidden"/>
+                <div>
+                    <label for="nombre" class="form-label">Nombre:</label>
+                    <input asp-for="nombre" class="form-control" type="text" required />
+                </div>
+                <div>
+                    <label for="descripcion" class="form-label">Descripción:</label>
+                    <input asp-for="descripcion" type="text" class="form-control" required />
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a asp-controller="Roles" asp-action="Lista" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+
+    </div>
+    
+</body>
+</html>

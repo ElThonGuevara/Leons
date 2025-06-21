@@ -31,7 +31,7 @@ namespace Leons.Migrations
                 {
                     idRol = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -45,7 +45,7 @@ namespace Leons.Migrations
                 {
                     idProducto = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     precio = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
                     stock = table.Column<int>(type: "int", nullable: false),
@@ -73,9 +73,9 @@ namespace Leons.Migrations
                     nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    direccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     idRol = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

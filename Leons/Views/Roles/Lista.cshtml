@@ -1,0 +1,53 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<Leons.Models.Rol>;
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Roles</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    </head>
+    <body>
+        <div class="container">
+		    <a asp-controller="Roles" asp-action="Crear" class="btn btn-primary mb-3">Crear Nuevo Rol</a>
+            <div>Lista de Roles</div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+				    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var rol in Model)
+                    {
+                        <tr>
+                            <td>@rol.idRol</td>
+                            <td>@rol.nombre</td>
+                            <td>@rol.descripcion</td>
+                            <td>
+                            <a asp-controller="Roles" asp-action="Editar" asp-route-id="@rol.idRol" class="btn btn-dark"><i class="bi bi-pen-fill fs-3"></i></a>
+                            <a asp-controller="Roles" asp-action="Eliminar" asp-route-id="@rol.idRol" class="btn btn-danger" onclick="return confirmar()"><i class="bi bi-trash-fill fs-3"></i></a>
+                            </td>
+                        </tr>
+				    }
+                </tbody>
+            </table>
+        </div>
+    </body>
+    </html>
+
+@section Scripts{
+    <script>
+        function confirmar(){
+            return confirm("¿Estás seguro de eliminar este rol?")
+        }
+        
+    </script>
+
+}

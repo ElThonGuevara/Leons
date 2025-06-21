@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Leons.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20250619134427_PrimeraMigracion")]
+    [Migration("20250621024506_PrimeraMigracion")]
     partial class PrimeraMigracion
     {
         /// <inheritdoc />
@@ -160,6 +160,7 @@ namespace Leons.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("nombre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("precio")
@@ -192,6 +193,7 @@ namespace Leons.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("nombre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("idRol");
@@ -212,7 +214,6 @@ namespace Leons.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("direccion")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("email")
@@ -230,10 +231,10 @@ namespace Leons.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("telefono")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("idUsuario");

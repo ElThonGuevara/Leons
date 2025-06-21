@@ -1,0 +1,91 @@
+﻿
+@{
+	Layout = null;
+}
+@model Leons.ViewModel.RegistroVM;
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Registrarse</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/Leons.styles.css" asp-append-version="true" />
+    </head>
+    <body>
+    <div class="row mt-5 justify-content-center align-content-center">
+
+        <div class="col-sm-5">
+            <div class="card-header">
+                Registrarse
+                <i class="bi bi-0-square-fill"></i>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <form asp-controller="Acceso" asp-action="Registro" method="post">
+                        <div>
+                            <label for="Nombre" class="form-label">Nombre</label>
+                            <input asp-for="nombre" class="form-control" required />
+                            <span asp-validation-for="nombre" class="text-danger"></span>
+                        </div>
+                        <div>
+                            <label>Apellido</label>
+                            <input asp-for="apellido" class="form-control" required />
+                            <span asp-validation-for="nombre" class="text-danger"></span>
+                        </div>
+                        <div>
+                            <label  class="form-label">Nombre de usuario</label>
+                            <input asp-for="nombreUsuario" class="form-control" required />
+                            <span asp-validation-for="nombreUsuario" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="Email">Correo</label>
+                            <input asp-for="email" type="email" class="form-control" required />
+                            <span asp-validation-for="email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <input asp-for="password" type="password" class="form-control" required />
+                            <span asp-validation-for="password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmarPassword">Confirmar Contraseña</label>
+                            <input asp-for="confirmarPassword" type="password" class="form-control" required />
+                            <span asp-validation-for="confirmarPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="direccion">Dirección</label>
+                            <input asp-for="direccion" type="text" class="form-control" required />
+                            <span asp-validation-for="direccion" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input asp-for="telefono" type="tel" pattern="9[0-9]{8}" title="número de teléfono de 9 dígitos" class="form-control" required />
+                            <span asp-validation-for="confirmarPassword" class="text-danger"></span>
+                        </div>
+
+                        <select asp-for="idRol" class="form-select" required>
+                            <option value="">Seleccione un rol</option>
+                            @if(ViewBag.Roles != null)
+                            {
+                                @foreach (var rol in ViewBag.Roles)
+                                {
+                                    <option value="@rol.idRol">@rol.nombre</option>
+                                }
+                            }
+                            
+                        </select>
+
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                        <a asp-controller="Acceso" asp-action="Login" class="btn btn-secondary">¿Ya tiene una cuenta?</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+    </html>
+

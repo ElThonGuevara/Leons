@@ -8,7 +8,7 @@ namespace Leons.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idRol { get; set; }
-        public string? nombre { get; set; }
+        public string nombre { get; set; }
         public string? descripcion { get; set; }
 
         public ICollection<Usuario> usuarios { get; set; }

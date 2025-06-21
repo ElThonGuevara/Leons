@@ -8,15 +8,15 @@ namespace Leons.Data
         public AppDBContext(DbContextOptions options) : base(options)
         {
         }
-        DbSet<Rol> Roles { get; set; }
-        DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Rol> Roles { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
         //DbSet<Cliente> Clientes { get; set; }
         //DbSet<Administrador> Administradores { get; set; }
-        DbSet<Pedido> Pedidos { get; set; }
-        DbSet<Producto> Productos { get; set; }
-        DbSet<Carrito> Carritos { get; set; }
-        DbSet<DetalleCarrito> DetalleCarritos { get; set; }
-        DbSet<DetallePedido> DetallePedidos{ get; set; }
+        public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<Producto> Productos { get; set; }
+        public DbSet<Carrito> Carritos { get; set; }
+        public DbSet<DetalleCarrito> DetalleCarritos { get; set; }
+        public DbSet<DetallePedido> DetallePedidos{ get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

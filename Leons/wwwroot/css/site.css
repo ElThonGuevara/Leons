@@ -20,3 +20,35 @@ html {
 body {
   margin-bottom: 60px;
 }
+.mi-carrusel {
+    margin-top: 0;
+    height: calc(100vh - 56px); /* Ajusta según el alto de tu navbar */
+    overflow: hidden;
+}
+
+.mi-carrusel .carousel-item img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+}
+.custom-caption {
+    left: 5%;
+    right: auto;
+    bottom: 20%;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+@media (max-width: 768px) {
+    .custom-caption {
+        left: 2%;
+        bottom: 10%;
+    }
+
+        .custom-caption h1 {
+            font-size: 2rem;
+        }
+
+        .custom-caption p {
+            font-size: 1rem;
+        }
+}
