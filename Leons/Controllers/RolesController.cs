@@ -1,9 +1,11 @@
 ﻿using Leons.Data;
 using Leons.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Leons.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class RolesController : Controller
     {
         private readonly AppDBContext _appDBContext;
@@ -65,8 +67,8 @@ namespace Leons.Controllers
         [HttpGet]
         public IActionResult Eliminar(int id)
         {
-            var usuario = _appDBContext.Roles.FirstOrDefault(r => r.idRol==id);
-            _appDBContext.Roles.Remove(usuario);
+            var rol = _appDBContext.Roles.FirstOrDefault(r => r.idRol==id);
+            _appDBContext.Roles.Remove(rol);
             _appDBContext.SaveChanges();
             return RedirectToAction("Lista","Roles");
         }

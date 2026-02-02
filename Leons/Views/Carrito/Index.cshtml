@@ -1,0 +1,47 @@
+﻿@model Leons.Models.Carrito;
+@{
+    ViewData["Title"] = "Mi Carrito";
+    Layout = "~/Views/Shared/_LayoutTienda.cshtml";
+}
+
+<h2>Mi Carrito</h2>
+
+@if (Model?.detalleCarrito?.Any() ?? false)
+{
+    <table class="table align-items-center">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.detalleCarrito)
+            {
+                <tr>
+                    <td>@item.Producto.nombre</td>
+                    <td>@item.cantidad</td>
+                    <td>S/. @item.Producto.precio</td>
+                    <td>S/. @(item.cantidad* item.Producto.precio)</td>
+                    <td>
+                        <a asp-controller="Carrito" asp-action="Eliminar" asp-route-idDetalleCarrito="@item.idDetalleCarrito" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill fs-4"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-controller="Pago" asp-action="Crear">Finalizar Pedido</a>
+    @* <form asp-controller="Pago" asp-action="Crear" method="post">
+        <button type="submit" class="btn btn-success">Finalizar Pedido</button>
+    </form> *@
+
+    <a href="#" class="btn btn-success" onclick="window.history.back(); return false;">Continuar con la Compra</a>
+}
+else
+{
+    <p>Tu carrito está vacío.</p>
+}
+

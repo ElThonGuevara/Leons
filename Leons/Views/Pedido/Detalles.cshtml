@@ -1,0 +1,41 @@
+﻿@model Pedido
+
+@{
+    ViewData["Title"] = "Detalles del Pedido";
+    Layout = "~/Views/Shared/_LayoutTienda.cshtml";
+    var total = Model.detallePedidos.Sum(dp => dp.cantidad * dp.precioUnitario);
+}
+
+<h2>Detalles del Pedido #@Model.idPedido</h2>
+<p><strong>Fecha:</strong> @Model.fechaPedido.ToShortDateString()</p>
+<p><strong>Estado:</strong> @Model.estado</p>
+
+<hr />
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Producto</th>
+            <th>Imagen Referencial</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.detallePedidos)
+        {
+            <tr>
+                <td>@item.Producto.nombre</td>
+                <td><img src="@Url.Content(item.Producto.imagen)" alt="Imagen de @item.Producto.nombre" class="img-thumbnail" style="width: 100px; height: auto;"></td>
+                <td>@item.cantidad</td>
+                <td>S/. @item.precioUnitario</td>
+                <td>S/. @(item.cantidad* item.precioUnitario)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4 class="text-end">Total: <strong>S/. @total</strong></h4>
+
+<a asp-action="Historial" class="btn btn-outline-secondary">Volver al Historial</a>

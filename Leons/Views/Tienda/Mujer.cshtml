@@ -1,0 +1,37 @@
+﻿@model List<Producto>
+@{
+    ViewData["Title"] = "Mujeres";
+    Layout = "~/Views/Shared/_LayoutTienda.cshtml";
+}
+
+@if (Model?.Any() ?? false)
+{
+
+
+    <div class="container py-5">
+        <h2 class="mb-4">Mujeres</h2>
+        <div class="row g-4">
+            @foreach (var prod in Model)
+            {
+                <div class="col-md-3">
+                    <div class="card h-100">
+                        <img src="@Url.Content(prod.imagen)" class="card-img-top card-img-custom" />
+                        <div class="card-body">
+                            <h5 class="card-title">@prod.nombre</h5>
+                            <p class="card-text">@prod.descripcion</p>
+                            <p><strong>S/. @prod.precio</strong></p>
+                            <a href="#" class="btn btn-outline-primary">Agregar al carrito</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div>
+        <h2 class="mb-4">@ViewBag.Categoria</h2>
+        <h4>No hay productos para mostrar</h4>
+    </div>
+}

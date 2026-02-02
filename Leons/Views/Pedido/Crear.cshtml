@@ -1,0 +1,60 @@
+﻿@model Leons.ViewModel.PedidoVM;
+@{
+    ViewData["Title"] = "Realizar Pedido";
+}
+
+<div class="container py-4">
+    <h2 class="mb-4 text-center">Realizar un Pedido o Cotización</h2>
+
+    @if (TempData["mensaje"] != null)
+    {
+        <div class="alert alert-success">@TempData["mensaje"]</div>
+    }
+
+    <form asp-controller="Pedido" asp-action="Crear" method="post" >
+        <div class="mb-3">
+            <label for="producto">Producto</label>
+            <select class="form-select" asp-for="idProducto">
+                <option value="">Selecciona un producto</option>
+                @foreach (var producto in ViewBag.Productos)
+                {
+                    <option value="@producto.idProducto">@producto.nombre</option>
+                }
+            </select>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label>Cantidad</label>
+                <input asp-for="Cantidad" type="number" class="form-control" required />
+            </div>
+            <div class="col-md-6">
+                <label>Talla</label>
+                <select asp-for="Talla" class="form-select">
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label>Especificaciones</label>
+            <textarea asp-for="Especificaciones" class="form-control" rows="4"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label>Archivo de diseño (opcional)</label>
+            <input asp-for="ArchivoDiseno" type="file" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Tiempo estimado de entrega</label>
+            <input class="form-control" value="7 a 10 días hábiles" readonly />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar Pedido</button>
+    </form>
+</div>
+

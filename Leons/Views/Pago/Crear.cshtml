@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewData["Title"] = "Pago";
+    Layout = "~/Views/Shared/_LayoutTienda.cshtml";
+    var carrito = ViewBag.Carrito as Leons.Models.Carrito;
+    decimal montoTotal = ViewBag.MontoTotal;
+}
+
+
+<h2>Resumen de tu compra</h2>
+
+@if (carrito != null && carrito.detalleCarrito.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio unitario</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in carrito.detalleCarrito)
+            {
+                <tr>
+                    <td>@item.Producto.nombre</td>
+                    <td>@item.cantidad</td>
+                    <td>@item.Producto.precio.ToString("C")</td>
+                    <td>@(item.cantidad* item.Producto.precio).ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                <td><strong>@montoTotal.ToString("C")</strong></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <form asp-controller="Pago" asp-action="Crear" method="post">
+        <div class="mb-3">
+            <label for="metodoPago" class="form-label">Método de pago</label>
+            <select class="form-select" id="metodoPago" name="metodoPago" required>
+                <option value="">Seleccione...</option>
+                <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+                <option value="PayPal">PayPal</option>
+                <option value="Transferencia Bancaria">Transferencia Bancaria</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Pagar</button>
+    </form>
+}
+else
+{
+    <div class="alert alert-warning">
+        Tu carrito está vacío.
+    </div>
+}
+
+@* <h2>Confirmar Pago</h2>
+
+<p>Total a pagar: <strong>S/. @ViewBag.MontoTotal</strong></p>
+
+<form asp-controller="Pago" asp-action="Crear" method="post">
+    <input type="hidden" name="idPedido" value="@ViewBag.IdPedido" />
+
+    <div class="mb-3">
+        <label>Método de pago</label>
+        <select name="metodoPago" class="form-select" required>
+            <option value="">Seleccione</option>
+            <option value="Transferencia">Transferencia</option>
+            <option value="Tarjeta">Tarjeta</option>
+            <option value="Efectivo">Efectivo</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Pagar</button>
+</form> *@

@@ -1,0 +1,81 @@
+﻿@model Leons.ViewModel.AdminDashboardVM;
+@{
+    ViewData["Title"] = "Panel de Control del Administrador";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    
+}
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title></title>
+        
+    </head>
+    <body>
+    <div class="container-fluid py-4">
+        <h2 class="mb-4">Panel de Control del Administrador</h2>
+
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <h5>Total de Pedidos</h5>
+                        <h3>@Model.TotalPedidos</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h5>Total de Clientes</h5>
+                        <h3>@Model.TotalClientes</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <h5>Total de Productos</h5>
+                        <h3>@Model.TotalProductos</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4>Últimos pedidos</h4>
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Usuario</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(Model.UltimosPedidos == null || !Model.UltimosPedidos.Any())
+                {
+                    <tr>
+                        <td colspan="4" class="text-center">No hay pedidos recientes.</td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var pedido in Model.UltimosPedidos)
+                    {
+                        <tr>
+                            <td>@pedido.idPedido</td>
+                            <td>@pedido.fechaPedido.ToShortDateString()</td>
+                            <td>@pedido.usuario.nombre @pedido.usuario.apellido</td>
+                            <td>@pedido.estado</td>
+                        </tr>
+                    }
+                }
+                
+                
+            </tbody>
+        </table>
+    </div>
+
+    </body>
+    </html>
+

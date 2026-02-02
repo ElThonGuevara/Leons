@@ -117,6 +117,39 @@ namespace Leons.Migrations
                     b.ToTable("DetallePedidos");
                 });
 
+            modelBuilder.Entity("Leons.Models.Pago", b =>
+                {
+                    b.Property<int>("idPago")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idPago"));
+
+                    b.Property<string>("estado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("fechaPago")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("idPedido")
+                        .HasColumnType("int");
+
+                    b.Property<string>("metodoPago")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("montoTotal")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.HasKey("idPago");
+
+                    b.HasIndex("idPedido");
+
+                    b.ToTable("Pagos");
+                });
+
             modelBuilder.Entity("Leons.Models.Pedido", b =>
                 {
                     b.Property<int>("idPedido")
@@ -153,8 +186,17 @@ namespace Leons.Migrations
                     b.Property<string>("descripcion")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("genero")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("idCategoria")
                         .HasColumnType("int");
+
+                    b.Property<string>("imagen")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("imagenLocal")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("nombre")
                         .IsRequired()
@@ -290,6 +332,17 @@ namespace Leons.Migrations
                     b.Navigation("pedido");
                 });
 
+            modelBuilder.Entity("Leons.Models.Pago", b =>
+                {
+                    b.HasOne("Leons.Models.Pedido", "Pedido")
+                        .WithMany("Pagos")
+                        .HasForeignKey("idPedido")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Pedido");
+                });
+
             modelBuilder.Entity("Leons.Models.Pedido", b =>
                 {
                     b.HasOne("Leons.Models.Usuario", "usuario")
@@ -335,6 +388,8 @@ namespace Leons.Migrations
 
             modelBuilder.Entity("Leons.Models.Pedido", b =>
                 {
+                    b.Navigation("Pagos");
+
                     b.Navigation("detallePedidos");
                 });
 

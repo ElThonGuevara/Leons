@@ -14,9 +14,12 @@ namespace Leons.Data
         //DbSet<Administrador> Administradores { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Producto> Productos { get; set; }
+        public DbSet<Categoria> Categoria { get; set; }
+
         public DbSet<Carrito> Carritos { get; set; }
         public DbSet<DetalleCarrito> DetalleCarritos { get; set; }
         public DbSet<DetallePedido> DetallePedidos{ get; set; }
+        public DbSet<Pago> Pagos { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -66,6 +69,10 @@ namespace Leons.Data
                 WithMany(p => p.detallePedidos)
                 .HasForeignKey(dp => dp.idProducto)
                 .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Pago>().HasOne(p => p.Pedido).
+                WithMany(p => p.Pagos)
+                .HasForeignKey(p => p.idPedido)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Producto>(tb =>
             {
@@ -74,6 +81,10 @@ namespace Leons.Data
             modelBuilder.Entity<DetallePedido>(tb =>
             {
                 tb.Property(col => col.precioUnitario).HasPrecision(10, 2);
+            });
+            modelBuilder.Entity<Pago>(tb =>
+            {
+                tb.Property(col => col.montoTotal).HasPrecision(10, 2);
             });
         }
 

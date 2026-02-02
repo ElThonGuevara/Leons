@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "Confirmación de Pedido";
+    Layout = "~/Views/Shared/_LayoutTienda.cshtml";
+}
+
+<div class="text-center mt-5">
+    <h2 class="text-success">¡Pedido Realizado con Éxito!</h2>
+    <p class="lead">Gracias por tu compra. Tu pedido ha sido registrado correctamente y está en proceso.</p>
+
+    <img src="https://cdn-icons-png.flaticon.com/512/845/845646.png" alt="Pedido Confirmado" width="120" />
+
+    <div class="mt-4">
+        <a asp-controller="Tienda" asp-action="Index" class="btn btn-outline-primary">Volver al inicio</a>
+        <a asp-controller="Pedido" asp-action="Historial" class="btn btn-success">Ver mis pedidos</a>
+    </div>
+</div>
+

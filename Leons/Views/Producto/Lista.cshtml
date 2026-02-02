@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Leons.Models.Producto>;
+@{
+    ViewData["Title"] = "Lista de Productos";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+    <div class="container">
+        <a asp-controller="Producto" asp-action="Crear" class="btn btn-primary mb-3">Crear Nuevo Producto</a>
+        <div>Lista de Productos</div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>stock</th>
+                    <th>talla</th>
+                    <th>género</th>
+                    <th>categoria</th>
+                    <th>imagen</th>
+					<th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var producto in Model)
+                {
+                    <tr>
+                        <td>@producto.idProducto</td>
+                        <td>@producto.nombre</td>
+                        <td>@producto.descripcion</td>
+						<td>@producto.precio</td>
+						<td>@producto.stock</td>
+						<td>@producto.talla</td>
+                        <td>@producto.genero</td>
+						<td>@producto.categoria.nombre</td>
+                        <td>
+							<img src="@Url.Content(producto.imagen)" alt="Imagen de @producto.nombre" class="img-thumbnail" style="width: 100px; height: auto;">
+						</td>
+                        <td>
+                            <a asp-controller="Producto" asp-action="Editar" asp-route-id="@producto.idProducto" class="btn btn-dark"><i class="bi bi-pen-fill fs-3"></i></a>
+                            <a asp-controller="Producto" asp-action="Eliminar" asp-route-id="@producto.idProducto" class="btn btn-danger" onclick="return confirmar()"><i class="bi bi-trash-fill fs-3"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+@section Scripts {
+    <script>
+        function confirmar(){
+            return confirm("¿Estás seguro de eliminar este Producto?")
+        }
+
+    </script>
+
+}

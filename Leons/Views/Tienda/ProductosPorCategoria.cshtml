@@ -1,0 +1,75 @@
+﻿@model List<Producto>
+@{
+    ViewData["Title"] = ViewBag.Categoria;
+    Layout = "~/Views/Shared/_LayoutTienda.cshtml";
+}
+
+@if (Model?.Any() ?? false)
+{
+    
+
+<div class="container py-5">
+    <h2 class="mb-4">@ViewBag.Categoria</h2>
+    <div class="row g-4">
+        @foreach (var prod in Model)
+        {
+            <div class="col-md-3">
+                <div class="card h-100">
+                    <img src="@Url.Content(prod.imagen)" class="card-img-top card-img-custom" />
+                    <div class="card-body">
+                        <h5 class="card-title">@prod.nombre</h5>
+                        <p class="card-text">@prod.descripcion</p>
+                        <div class="d-flex justify-content-around">
+                                <p><span>Stock: </span>@prod.stock</p>
+                                <p><span>Talla: </span>@prod.talla.ToLower()</p>
+                        </div>
+                        
+                            <div class="mb-2">
+                                <label for="cantidad-@prod.idProducto" class="form-label">Cantidad:</label>
+                                <input type="number"
+                                       class="form-control cantidad-input"
+                                       id="cantidad-@prod.idProducto"
+                                       min="1"
+                                       max="@prod.stock"
+                                       value="1"
+                                       style="width: 80px; display: inline-block;" />
+                            </div>
+                        <p><strong>S/. @prod.precio</strong></p>
+                            <button type="button" class="btn btn-outline-primary btn-agregar" data-id="@prod.idProducto">
+                                Agregar al carrito
+                            </button>
+                            <div style="display:none;" class="mensaje-carrito alert alert-success"></div>
+                        @* <a asp-controller="Carrito" asp-action="Agregar" asp-route-idProducto="@prod.idProducto" class="btn btn-outline-primary">Agregar al carrito</a> *@
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    </div>
+}
+else
+{
+    <div>
+        <h2 class="mb-4">@ViewBag.Categoria</h2>
+        <h4>No hay productos para mostrar</h4>
+    </div>
+}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).on('click', '.btn-agregar', function() {
+        var idProducto = $(this).data('id');
+        var $card = $(this).closest('.card-body');
+        var $mensaje = $card.find('.mensaje-carrito');
+        var cantidad = $card.find('.cantidad-input').val() || 1;
+        $.ajax({
+            url: '/Carrito/Agregar',
+            type: 'POST',
+            data: { idProducto: idProducto, cantidad: cantidad },
+            success: function(response) {
+                if (response.success) {
+                    $mensaje.text(response.message).fadeIn().delay(2000).fadeOut();
+                }
+            }
+        });
+    });
+</script>

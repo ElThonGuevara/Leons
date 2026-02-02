@@ -15,5 +15,6 @@ namespace Leons.Models
         public Usuario usuario { get; set; }
 
         public ICollection<DetallePedido> detallePedidos { get; set; }
+        public ICollection<Pago> Pagos { get; set; }
     }
 }

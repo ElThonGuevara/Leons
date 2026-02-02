@@ -1,0 +1,197 @@
+﻿
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    scroll-padding-top: 70px;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main{
+    margin-top: 70px;
+}
+
+.container-fluid > main {
+    flex: 1 0 auto;
+}
+
+.container-fluid > footer,
+.container-fluid > .footer {
+    flex-shrink: 0;
+}
+.masthead {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 35rem;
+    padding: 15rem 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("../img/index/leonsPrincipal.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+
+.about-section {
+    background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 75%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+.bg-color {
+    background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 75%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+    .about-section p {
+        margin-bottom: 5rem;
+    }
+.color-nav {
+    background-color: #A3A19F;
+}
+.color-t {
+    color: #d00000;
+}
+.color-l {
+    color: #d1cb9e;
+}
+.color-button {
+    background: linear-gradient(90deg, #d00000, #dc2f02, #e85d04, #f48c06, #faa307);
+}
+
+.bg-fond {
+    background: linear-gradient(90deg, #c5c5c5, #ebebeb, #dedede, #d1d1d1, #777777);
+}
+
+a {
+    color: #6c757d !important;
+}
+/* wwwroot/css/perzonalizado.css */
+.logo-gradient {
+    background: linear-gradient(90deg, #d00000, #dc2f02, #e85d04, #f48c06, #faa307);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+}
+
+
+.card-img-custom {
+    width: 100%;
+    height: 500px !important; /* Ajusta según lo que necesites */
+    object-fit: cover;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.mi-carrusel {
+    /*margin-top: 70px !important;*/
+    height: calc(100vh - 70px) !important; /* Ajusta según el alto de tu navbar */
+    overflow: hidden;
+}
+
+    .mi-carrusel .carousel-item img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+    }
+
+.custom-caption {
+    left: 5%;
+    right: auto;
+    bottom: 20%;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+/*----------Regsitro-----------*/
+/*body {
+    background: #f5f5f5;
+}*/
+
+.registro-container {
+    max-width: 950px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    display: flex;
+    padding: 0;
+}
+
+.registro-form {
+    flex: 2;
+    padding: 40px 32px 32px 32px;
+    border-right: 1px solid #eee;
+}
+
+
+.registro-form label {
+    font-size: 15px;
+    color: #222;
+    margin-bottom: 2px;
+}
+
+.registro-form input,
+.registro-form select {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    font-size: 15px;
+    margin-bottom: 18px;
+    background: transparent;
+}
+
+    .registro-form input:focus,
+    .registro-form select:focus {
+        border-bottom: 2px solid #00853f;
+    }
+
+.registro-form .btn-primary {
+    width: 100%;
+    background: #00853f;
+    border: none;
+    border-radius: 24px;
+    padding: 10px 0;
+    font-size: 16px;
+    margin-top: 18px;
+}
+
+.registro-form .btn-secondary {
+    width: 100%;
+    margin-top: 10px;
+    background: #fff;
+    color: #00853f;
+    border: 1px solid #00853f;
+    border-radius: 24px;
+}
+
+
+/*-------------------------*/
+@media (max-width:1000px){
+    main {
+        margin-top: 50px;
+    }
+    html {
+        scroll-padding-top: 20px;
+    }
+}
+
+@media (max-width: 850px) {
+    html {
+        scroll-padding-top: 40px;
+    }
+    main {
+        margin-top: 40px;
+    }
+    .card-img-custom {
+        width: 100%;
+        height: 300px; /* Ajusta según lo que necesites */
+        object-fit: cover;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+    }
+}
+

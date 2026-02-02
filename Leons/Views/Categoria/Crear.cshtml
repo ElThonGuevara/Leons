@@ -1,0 +1,24 @@
+﻿@model Leons.Models.Categoria;
+@{
+    ViewData["Title"] = "Crear Categorias";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+    <div class="card">
+        <div class=" card-header">Crear Categoria</div>
+        <div>
+            <form asp-controller="Categoria" asp-action="Crear" method="post">
+                <div>
+                    <label for="nombre" class="form-label">Nombre:</label>
+                    <input asp-for="nombre" class="form-control" type="text" required />
+                </div>
+                <div>
+                    <label for="descripcion" class="form-label">Descripción:</label>
+                    <input asp-for="descripcion" type="text" class="form-control" required />
+                </div>
+                <button type="submit" class="btn btn-primary">Crear</button>
+                <a asp-controller="Categoria" asp-action="Lista" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+
+    </div>

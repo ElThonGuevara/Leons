@@ -1,0 +1,45 @@
+﻿@model List<Pedido>
+
+@{
+    ViewData["Title"] = "Mis Pedidos";
+    Layout = "~/Views/Shared/_LayoutTienda.cshtml";
+}
+
+<h2 class="mt-4 mb-3">Historial de Pedidos</h2>
+
+@if (!Model.Any())
+{
+    <p>No tienes pedidos registrados.</p>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Total</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pedido in Model)
+            {
+                var total = pedido.detallePedidos.Sum(dp => dp.cantidad * dp.precioUnitario);
+                <tr>
+                    <td>@pedido.idPedido</td>
+                    <td>@pedido.fechaPedido.ToShortDateString()</td>
+                    <td>@pedido.estado</td>
+                    <td>S/. @total</td>
+                    <td>
+                        <a asp-action="Detalles" asp-route-id="@pedido.idPedido" class="btn btn-sm btn-outline-primary">
+                            Ver detalles
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<a asp-controller="Tienda" asp-action="Index" class="btn btn-outline-secondary">Volver a Tienda</a>

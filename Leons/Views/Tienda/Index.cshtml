@@ -1,0 +1,67 @@
+﻿@model List<Categoria>;
+@{
+    ViewData["Title"] = "Tienda";
+    Layout = "~/Views/Shared/_LayoutTienda.cshtml";
+}
+
+
+
+<div id="carouselExampleIndicators" class="carousel slide mi-carrusel ">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/img/todoMujer.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption text-start custom-caption">
+                <h1 class="display-1 fw-bold">Todo Mujer</h1>
+                <p class="fs-3">Hasta 50% dscto.</p>
+                <a class="btn btn-outline-light btn-lg" asp-controller="Tienda" asp-action="Mujer">Ver colección</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/img/todoHombre.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption text-start custom-caption">
+                <h1 class="display-1 fw-bold">Todo Hombre</h1>
+                <p class="fs-3">Hasta 50% dscto.</p>
+                <a class="btn btn-outline-light btn-lg" asp-controller="Tienda" asp-action="Hombre">Ver colección</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/img/todoNiño.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption text-start custom-caption">
+                <h1 class="display-1 fw-bold">Todo Niños</h1>
+                <p class="fs-3">Hasta 50% dscto.</p>
+                <a class="btn btn-outline-light btn-lg" href="#">Ver colección</a>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Explora por Categoría</h2>
+    <div class="row g-4 justify-content-center">
+        @foreach (var cat in Model)
+        {
+            <div class="col-md-3">
+                <div class="card h-100 text-center shadow-sm">
+                    <img src="~/img/categoria/@($"{cat.nombre.ToLower().Replace(" ", "")}.jpg")" class="card-img-top card-img-custom"/>
+                    <div class="card-body">
+                        <h5 class="card-title">@cat.nombre</h5>
+                        <a href="@Url.Action("ProductosPorCategoria", "Tienda", new { id = cat.idCategoria })" class="btn btn-primary">Ver productos</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

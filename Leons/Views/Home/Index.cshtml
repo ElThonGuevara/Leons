@@ -1,41 +1,171 @@
-﻿<div id="carouselExampleIndicators" class="carousel slide mt-0 mi-carrusel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="~/img/todoMujer.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption text-start custom-caption">
-                <h1 class="display-1 fw-bold">Todo Mujer</h1>
-                <p class="fs-3">Hasta 50% dscto.</p>
-                <a class="btn btn-outline-light btn-lg" href="#">Ver colección</a>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="~/img/todoHombre.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption text-start custom-caption">
-                <h1 class="display-1 fw-bold">Todo Hombre</h1>
-                <p class="fs-3">Hasta 50% dscto.</p>
-                <a class="btn btn-outline-light btn-lg" href="#">Ver colección</a>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="~/img/todoNiño.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption text-start custom-caption">
-                <h1 class="display-1 fw-bold">Todo Niños</h1>
-                <p class="fs-3">Hasta 50% dscto.</p>
-                <a class="btn btn-outline-light btn-lg" href="#">Ver colección</a>
+﻿<header class="masthead mi-carrusel">
+    <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+        <div class="d-flex justify-content-center">
+            <div class="text-center">
+                <h1 class=" text-light mx-auto my-0 text-uppercase">PRODUCCIONES TEXTILES</h1>
+                 
+                <h2 class="text-white-50 mx-auto mt-2 mb-5">Indumentaria y Accesorios</h2>
+                <p class="text-light mx-auto">Nacimos para seguir capacitandonos caminando al mismo ritmo de los avances tecnológicos, mejorar cada día, y poder darte productos de calidad, tu satisfacción es nuestro objetivo.</p>
+                <a class="btn btn-lg color-button text-white" href="#nosotros">EMPEZAR</a>
             </div>
         </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
+</header>
+<section id="nosotros" class="py-5 bg-fond">
+    <div class="container">
+        <h2 class="text-center mb-4">Nosotros</h2>
+
+        <div class="row">
+            <div class="col-md-6">
+                <p>
+                    En <strong>Leons Textiles</strong>, somos una empresa peruana dedicada a la confección de prendas de vestir para todo tipo de público y necesidad. Con más de 10 años de experiencia, ofrecemos soluciones textiles que combinan creatividad, tecnología y calidad.
+                </p>
+                <p>
+                    Nos especializamos en confección personalizada, producción empresarial y asesoría en moda. Nuestro equipo está comprometido con la excelencia en cada etapa del proceso.
+                </p>
+            </div>
+            <div class="col-md-6">
+                <video width="640" height="360" autoplay loop muted >
+                    <source src="~/video/vide.mp4" type="video/mp4">
+                    Tu navegador no soporta la reproducción de video.
+                </video>
+
+            </div>
+        </div>
+
+        <div class="row text-center mt-5">
+            <div class="col-md-4">
+                <i class="bi bi-bookmark-heart"></i>
+                <h4>Misión</h4>
+                <p>Ofrecer servicios textiles de alta calidad, personalizados y eficientes.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="bi bi-eye"></i>
+                <h4>Visión</h4>
+                <p>Ser líderes en confección personalizada a nivel nacional.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="bi bi-star"></i>
+                <h4>Valores</h4>
+                <p>Calidad, compromiso, innovación y responsabilidad.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About-->
+<section class="about-section text-center" id="services">
+    <div class="container-fluid pt-5">
+        <div class="container text-center text-white">
+            <h2>Nuestros Servicios</h2>
+            <p>En Leons Textiles, nos especializamos en ofrecer soluciones textiles integrales que se adaptan a las necesidades de cada cliente, ya sea particular o corporativo. Combinamos experiencia, creatividad y tecnología para entregar productos de alta calidad en cada etapa del proceso de confección. </p>
+        </div>
+
+        <div class="container py-5">
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+
+                <div class="col">
+                    <div class="card h-100 d-flex flex-column">
+                        <img src="~/img/index/blusa.jpg" class="card-img-top card-img-custom" alt="Confección a Medida">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Confección a Medida</h5>
+                            <p class="card-text flex-grow-1">
+                                Ofrecemos prendas hechas a tu medida con alta calidad y precisión en acabados.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card h-100 d-flex flex-column">
+                        <img src="~/img/index/poloCarnaval-1.jpg" class="card-img-top card-img-custom" alt="Diseño Personalizado">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Diseño Personalizado</h5>
+                            <p class="card-text flex-grow-1">
+                                Creamos diseños únicos para tu marca o evento, ajustándonos a tus necesidades.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card h-100 d-flex flex-column">
+                        <img src="~/img/index/bordado.jpg" class="card-img-top card-img-custom" alt="Producción para Empresas">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Producción para Empresas</h5>
+                            <p class="card-text flex-grow-1">
+                                Soluciones textiles para empresas, desde uniformes hasta ropa corporativa a gran escala.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card h-100 d-flex flex-column">
+                        <img src="~/img/index/poleraSaco.jpg" class="card-img-top card-img-custom" alt="Asesoría en Moda">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Asesoría en Moda</h5>
+                            <p class="card-text flex-grow-1">
+                                Te ayudamos a elegir los mejores estilos y telas para tu colección o uniforme.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="galeria" class="py-5 bg-fond">
+    <div class="container">
+        <h2 class="text-center mb-5">Galería de Trabajos</h2>
+
+        <!-- Galería de imágenes -->
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card"> 
+                    <img src="~/img/index/uniformeDeportivo.jpg" class="card-img-top card-img-custom" alt="Uniforme deportivo">
+                    <div class="card-body">
+                        <p class="card-text text-center">Uniformes deportivos personalizados sublimación digital.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/img/index/bordadoFiesta.jpg" class="card-img-top card-img-custom" alt="Bordados computarizados">
+                    <div class="card-body">
+                        <p class="card-text text-center">Bordados para tu negocio o emprendimiento</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/img/index/UniformeEscolar.jpg" class="card-img-top card-img-custom" alt="Ropa escolar">
+                    <div class="card-body">
+                        <p class="card-text text-center">Uniformes escolares confeccionados para institución educativa.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonios visuales -->
+        <div class="row mt-5">
+            <h3 class="text-center mb-4">Lo que dicen nuestros clientes</h3>
+            <div class="col-md-6">
+                <blockquote class="blockquote text-center">
+                    <p class="mb-2">"Excelente calidad y puntualidad. Nuestro personal luce uniforme gracias a Leons Textiles."</p>
+                    <footer class="blockquote-footer">Gerente de Operaciones, <cite title="Empresa ABC">Empresa ABC</cite></footer>
+                </blockquote>
+            </div>
+            <div class="col-md-6">
+                <blockquote class="blockquote text-center">
+                    <p class="mb-2">"Solicitamos polos personalizados para nuestro evento y superaron nuestras expectativas."</p>
+                    <footer class="blockquote-footer">Coordinadora de Marketing, <cite title="Startup XYZ">Startup XYZ</cite></footer>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</section>

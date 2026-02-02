@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Leons.Controllers
 {
@@ -44,7 +45,7 @@ namespace Leons.Controllers
                     };
                     _appDBContext.Usuarios.Add(usuario);
                     await _appDBContext.SaveChangesAsync();
-                    return RedirectToAction("Login", "Acceso");
+                    return RedirectToAction("Lista", "Usuario");
                 }
                 ViewBag.Roles = _appDBContext.Roles.ToList();
                 ModelState.AddModelError("", "Las contraseñas no coinciden");
@@ -128,9 +129,28 @@ namespace Leons.Controllers
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-
+            if(usuario.rol.nombre.ToLower() == "admin")
+            {
+                return RedirectToAction("Dashboard", "Admin");
+            }
+            else if (usuario.rol.nombre.ToLower() == "cliente")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return RedirectToAction("Index", "Home");
 
+
+        }
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult AccesoDenegado()
+        {
+            return View();
         }
     }
 }

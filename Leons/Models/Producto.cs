@@ -9,10 +9,13 @@ namespace Leons.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idProducto { get; set; }
         public string nombre { get; set; }
+        public string? imagenLocal { get; set; }
+        public string? imagen { get; set; } // URL o ruta de la imagen del producto
         public string? descripcion { get; set; }
         public decimal precio { get; set; }
         public int stock { get; set; }
         public string talla { get; set; }
+        public string? genero { get; set; } // Masculino, Femenino, Unisex, etc.
 
 
         public int idCategoria { get; set; }

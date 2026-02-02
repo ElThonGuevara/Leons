@@ -1,0 +1,55 @@
+﻿@model Leons.Models.Producto;
+@{
+    ViewData["Title"] = "Editar Productos";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+<div class="card">
+    <div class=" card-header">Editar Producto</div>
+    <div>
+        <form asp-controller="Producto" asp-action="Editar" method="post">
+            <input asp-for="idProducto" type="hidden" />
+            <div>
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input asp-for="nombre" class="form-control" type="text" required />
+            </div>
+            <div>
+                <label for="descripcion" class="form-label">Descripción:</label>
+                <input asp-for="descripcion" type="text" class="form-control" required />
+            </div>
+            <div>
+                <label for="precio" class="form-label">Precio:</label>
+                <input asp-for="precio" type="text" class="form-control" required />
+            </div>
+            <div>
+                <label for="stock" class="form-label">Stock:</label>
+                <input asp-for="stock" type="text" class="form-control" required />
+            </div>
+            <div>
+                <label for="talla" class="form-label">Talla:</label>
+                <input asp-for="talla" type="text" class="form-control" required />
+            </div>
+            <div>
+                <label for="genero" class="form-label">Género:</label>
+                <input asp-for="genero" type="text" class="form-control" required />
+            </div>
+            <div>
+                <label for="imagen" class="form-label">URL Imagen:</label>
+                <input asp-for="imagen" type="url" class="form-control" required />
+            </div>
+            <select asp-for="idCategoria" class="form-select">
+                <option value="">Seleccione una Categoria</option>
+                @if (ViewBag.Categorias != null)
+                {
+                    @foreach (var categoria in ViewBag.Categorias)
+                    {
+                        <option value="@categoria.idCategoria">@categoria.nombre</option>
+                    }
+				}
+			</select>   
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a asp-controller="Producto" asp-action="Lista" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+
+</div>
