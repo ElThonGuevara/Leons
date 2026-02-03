@@ -7,7 +7,8 @@
 <div class="card">
     <div class=" card-header">Editar Producto</div>
     <div>
-        <form asp-controller="Producto" asp-action="Editar" method="post">
+        <form asp-controller="Producto" asp-action="Editar" method="post"
+              enctype="multipart/form-data">
             <input asp-for="idProducto" type="hidden" />
             <div>
                 <label for="nombre" class="form-label">Nombre:</label>
@@ -34,8 +35,24 @@
                 <input asp-for="genero" type="text" class="form-control" required />
             </div>
             <div>
-                <label for="imagen" class="form-label">URL Imagen:</label>
-                <input asp-for="imagen" type="url" class="form-control" required />
+                <label>Subir imagen nueva</label>
+                <input type="file" name="imagenNueva" class="form-control" />
+
+                <label>O elegir imagen existente</label>
+                <select asp-for="ImagenSeleccionada" class="form-control">
+                    <option value="">-- Mantener imagen actual --</option>
+                    @foreach (var img in ViewBag.Imagenes)
+                    {
+                        <option value="@img">@img</option>
+                    }
+                </select>
+
+                <img id="previewImagen" 
+                    src="@Model.ImagenFinal"
+                     style="max-width:150px"
+                     class="mt-2 border rounded" />
+
+
             </div>
             <select asp-for="idCategoria" class="form-select">
                 <option value="">Seleccione una Categoria</option>
@@ -53,3 +70,30 @@
     </div>
 
 </div>
+
+
+<script>
+    const inputFile = document.querySelector('input[type="file"]');
+    const selectImagen = document.querySelector('select[name="ImagenSeleccionada"]');
+    const preview = document.getElementById('previewImagen');
+
+    // Previsualizar imagen nueva
+    inputFile.addEventListener('change', function () {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = e => preview.src = e.target.result;
+            reader.readAsDataURL(this.files[0]);
+
+            // Limpia el select
+            selectImagen.value = "";
+        }
+    });
+
+    // Previsualizar imagen existente
+    selectImagen.addEventListener('change', function () {
+        if (this.value) {
+            preview.src = `/img/productos/${this.value}`;
+            inputFile.value = "";
+        }
+    });
+</script>

@@ -35,7 +35,7 @@
                         <td>@producto.genero</td>
 						<td>@producto.categoria.nombre</td>
                         <td>
-							<img src="@Url.Content(producto.imagen)" alt="Imagen de @producto.nombre" class="img-thumbnail" style="width: 100px; height: auto;">
+							<img src="@producto.ImagenFinal"  @* "@Url.Content("~/img/productos"+producto.ImagenFinal)" *@ alt="Imagen de @producto.nombre" class="img-thumbnail" style="width: 100px; height: auto;">
 						</td>
                         <td>
                             <a asp-controller="Producto" asp-action="Editar" asp-route-id="@producto.idProducto" class="btn btn-dark"><i class="bi bi-pen-fill fs-3"></i></a>

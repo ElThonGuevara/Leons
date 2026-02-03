@@ -5,33 +5,40 @@
 
 }
     <div class="card">
-        <div class=" card-header">Crear Rol</div>
+        <div class=" card-header">Crear Producto</div>
         <div>
-            <form asp-controller="Producto" asp-action="Crear" method="post">
+        <form asp-controller="Producto" asp-action="Crear" method="post" enctype="multipart/form-data">
+
                 <div>
                     <label for="nombre" class="form-label">Nombre:</label>
                     <input asp-for="nombre" class="form-control" type="text" required />
                 </div>
+
                 <div>
                     <label for="descripcion" class="form-label">Descripción:</label>
                     <input asp-for="descripcion" type="text" class="form-control" required />
                 </div>
+
                 <div>
                     <label for="precio" class="form-label">Precio:</label>
                     <input asp-for="precio" step="0.01" inputmode="decimal" class="form-control" required />
                 </div>
+
                 <div>
                     <label for="stock" class="form-label">Stock:</label>
                     <input asp-for="stock" type="number" class="form-control" required />
                 </div>
+
                 <div>
                     <label for="talla" class="form-label">Talla:</label>
                     <input asp-for="talla" type="text" class="form-control" required />
                 </div>
+
                 <div>
                     <label for="generp" class="form-label">Genero:</label>
                     <input asp-for="genero" type="text" class="form-control" required />
                 </div>
+
                 <select asp-for="idCategoria" class="form-select" >
                     <option value="">Seleccione una Categoria</option>
                     @if (ViewBag.Categorias != null)
@@ -43,10 +50,16 @@
                     }
 
                 </select>
-                <div>
-                    <label for="imagen" class="form-label">URL Imagen:</label>
-                    <input asp-for="imagen" type="url" class="form-control" required />
-                </div>
+
+            <!-- 🖼️ IMAGEN -->
+            <div class="mb-3">
+                <label class="form-label">Imagen del producto</label>
+                <input type="file"
+                       name="imagen"
+                       class="form-control"
+                       accept="image/*"
+                       required />
+            </div>
                 <button type="submit" class="btn btn-primary">Crear</button>
                 <a asp-controller="Producto" asp-action="Lista" class="btn btn-secondary">Cancelar</a>
             </form>
