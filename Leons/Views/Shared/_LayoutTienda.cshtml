@@ -63,6 +63,11 @@
                                     <li><a class="dropdown-item" asp-controller="Acceso" asp-action="Login">Inicia sesión</a></li>
                                     <li><a class="dropdown-item" asp-controller="Acceso" asp-action="RegistroCliente">Registrate</a></li>
                                     <li><a class="dropdown-item" asp-controller="Pedido" asp-action="Historial">Mis Pedidos</a></li>
+                                        @if (User.IsInRole("admin") || User.IsInRole("administrador"))
+                                        {
+                                            <li><a class="dropdown-item" asp-controller="Admin" asp-action="Dashboard">Panel de adminstrador</a></li>
+
+                                        }
 
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="#">Mi cuenta</a></li>
