@@ -48,10 +48,15 @@ namespace Leons.Controllers
             if (imagen != null && imagen.Length > 0)
             {
                 string extension = Path.GetExtension(imagen.FileName);
-                string nombre = $"{Guid.NewGuid()}{extension}";
+                string nombreProducto = LimpiarTexto(producto.nombre);
+                string genero = LimpiarTexto(producto.genero ?? "general");
 
-                // ✔ RUTA CORRECTA
-                string carpeta = Path.Combine(_env.WebRootPath, "img/productos");
+                string nombreArchivo = $"{nombreProducto}-{genero}-{DateTime.Now.Ticks}{extension}";
+
+                string carpeta = Path.Combine(
+                    _env.WebRootPath,
+                    "img/productos"
+                );
 
                 // ✔ Crear carpeta si no existe
                 if (!Directory.Exists(carpeta))
@@ -59,12 +64,12 @@ namespace Leons.Controllers
                     Directory.CreateDirectory(carpeta);
                 }
 
-                string ruta = Path.Combine(carpeta, nombre);
+                string ruta = Path.Combine(carpeta, nombreArchivo);
 
                 using var stream = new FileStream(ruta, FileMode.Create);
                 await imagen.CopyToAsync(stream);
 
-                producto.imagenLocal = nombre;
+                producto.imagenLocal = nombreArchivo;
             }
 
             _appDBContext.Productos.Add(producto);
@@ -94,8 +99,7 @@ namespace Leons.Controllers
         [HttpPost]
         public async Task<IActionResult> Editar(Producto producto, IFormFile? imagenNueva)
         {
-            var productoDB = await _appDBContext.Productos
-       .FirstOrDefaultAsync(p => p.idProducto == producto.idProducto);
+            var productoDB = await _appDBContext.Productos.FirstOrDefaultAsync(p => p.idProducto == producto.idProducto);
 
             if (productoDB == null) return NotFound();
 
